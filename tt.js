@@ -32,22 +32,27 @@ $(document).ready(function() {
 			$('#' + this[0]) == $('#' + this[1]) == "X"
 			});
 		}
+
 	var permutation = []
 	var usedChars = []
 
 	function permutator(input) {
-		var i
-		var ch
-		var chars = input
-		for(i = 0; i <= chars.length; i++){
-			ch = chars.splice(i, 1);
+		var i ;
+		var ch ;
+		for(i = 0; i < input.length; i++){
+			ch = input.splice(i, 1)[0];
 			usedChars.push(ch);
-			if (chars.length == 0) permutation[permutation.length] = usedChars.join(" ");
-			permutator(chars.join(" "));
+			if (input.length == 0) {
+				permutation.push(usedChars.slice());
+
+			}
+			permutator(input);
 			input.splice(i,0,ch);
 			usedChars.pop();
 		}
-	}
+
+		return permutation
+	};
 });
 
 
