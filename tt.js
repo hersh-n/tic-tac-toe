@@ -5,18 +5,18 @@ $(document).ready(function() {
 	var permutation = []
 	var usedChars = []
 
-		function permutator(xMoves) {
+		function permutator(array) {
 			var i ;
 			var ch ;
-			for(i = 0; i < input.length; i++){
-				ch = input.splice(i, 1)[0];
+			for(i = 0; i < array.length; i++){
+				ch = array.splice(i, 1)[0];
 				usedChars.push(ch);
-				if (input.length == 0) {
+				if (array.length == 0) {
 					permutation.push(usedChars.slice());
 
 				}
-				permutator(input);
-				input.splice(i,0,ch);
+				permutator(array);
+				array.splice(i,0,ch);
 				usedChars.pop();
 			}
 
@@ -32,6 +32,7 @@ $(document).ready(function() {
 		} else {
 			$(this).html('O');
 		}
+		permutator(xMoves)
 		checkForWinner(permutation)
 		$(this).off('click')
 		turn++;
@@ -47,18 +48,22 @@ $(document).ready(function() {
  // 		}
 	// };
 
-	function checkForWinner(input) {
-		var total = 0
-		var eachTotal = []
-		for(i = 0; i < input.length; i++){
-		$.each(permutation[i], function() {
-			total += this;
-			//eachTotal.push(total)
-		});
+	function checkForWinner(arrayOfMoves) {
+
+		var total = 0;
+		var eachTotal = [];
+		for(i = 0; i < arrayOfMoves.length; i++){
+				total = arrayOfMoves[i].reduce(function(a, b) {
+					return a + b;
+				});
+				eachTotal.push(total);
+		}
+		for(i = 0; i < eachTotal.length; i++){
+    	if(eachTotal[i] == 15){
+    	window.alert("X wins");
     }
-    if(total / input.length == 15)
-    	document.write("X wins")
-    return total
+  }
+    return eachTotal;
 	}
 
 
