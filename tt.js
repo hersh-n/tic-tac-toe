@@ -2,7 +2,9 @@ $(document).ready(function() {
 	var winningCombos = [[1,2,3],[4,5,6]]
 	var turn = 1;
 	var xMoves = []
-	var permutation = []
+	var oMoves = []
+	var xPermutation = []
+	var oPermutation = []
 	var usedChars = []
 
 		function permutator(array) {
@@ -11,16 +13,22 @@ $(document).ready(function() {
 			for(i = 0; i < array.length; i++){
 				ch = array.splice(i, 1)[0];
 				usedChars.push(ch);
-				if (array.length == 0) {
-					permutation.push(usedChars.slice());
-
+				if (array.length == 0 && array == oMoves) {
+					oPermutation.push(usedChars.slice());
+				}
+				else if(array.length == 0 && array == xMoves){
+					xPermutation.push(usedChars.slice());
 				}
 				permutator(array);
 				array.splice(i,0,ch);
 				usedChars.pop();
 			}
-
-			return permutation
+			if (array == oMoves){
+				return oPermutation
+			}
+			else if(array == oMoves){
+				return xPermutation
+			}
 		};
 
 
@@ -29,11 +37,18 @@ $(document).ready(function() {
 		if (turn % 2 === 0) {
 			$(this).html('X');
 			xMoves.push(parseInt($(this).attr('id')))
+				if (turn > 4){
+					permutator(xMoves)
+					checkForWinner(xPermutation)
+				}
 		} else {
 			$(this).html('O');
+			oMoves.push(parseInt($(this).attr('id')))
+				if (turn > 4){
+					permutator(oMoves)
+					checkForWinner(oPermutation)
+				}
 		}
-		permutator(xMoves)
-		checkForWinner(permutation)
 		$(this).off('click')
 		turn++;
 	});
@@ -53,14 +68,20 @@ $(document).ready(function() {
 		var total = 0;
 		var eachTotal = [];
 		for(i = 0; i < arrayOfMoves.length; i++){
+			//if(arrayOfMoves[i].length > 3){
+			//	arrayOfMoves[i] = arrayOfMoves[i].slice(0, 3)
+			//}
 				total = arrayOfMoves[i].reduce(function(a, b) {
 					return a + b;
 				});
 				eachTotal.push(total);
 		}
 		for(i = 0; i < eachTotal.length; i++){
-    	if(eachTotal[i] == 15){
+    	if(eachTotal[i] == 15 && arrayOfMoves == xPermutation){
     	window.alert("X wins");
+    }
+    else if(eachTotal[i] == 15 && arrayOfMoves == oPermutation){
+    	window.alert("O wins");
     }
   }
     return eachTotal;
