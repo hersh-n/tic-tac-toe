@@ -5,23 +5,23 @@ $(document).ready(function() {
 	var oMoves = []
 	var xPermutation = []
 	var oPermutation = []
-	var usedChars = []
+	var usedNum = []
 
 		function permutator(array) {
 			var i ;
-			var ch ;
+			var num ;
 			for(i = 0; i < array.length; i++){
-				ch = array.splice(i, 1)[0];
-				usedChars.push(ch);
+				num = array.splice(i, 1)[0];
+				usedNum.push(num);
 				if (array.length == 0 && array == oMoves) {
-					oPermutation.push(usedChars.slice());
+					oPermutation.push(usedNum.slice());
 				}
 				else if(array.length == 0 && array == xMoves){
-					xPermutation.push(usedChars.slice());
+					xPermutation.push(usedNum.slice());
 				}
 				permutator(array);
-				array.splice(i,0,ch);
-				usedChars.pop();
+				array.splice(i,0,num);
+				usedNum.pop();
 			}
 			if (array == oMoves){
 				return oPermutation
