@@ -76,23 +76,27 @@ $(document).ready(function() {
 				});
 				eachTotal.push(total);
 		}
+		console.log(eachTotal);
 		for(i = 0; i < eachTotal.length; i++){
     	if(eachTotal[i] == 15 && arrayOfMoves == xPermutation){
     	window.alert("X wins");
     	window.location.reload();
-    	break
-    }
-    else if(eachTotal[i] == 15 && arrayOfMoves == oPermutation){
-    	window.alert("O wins");
-    	window.location.reload();
-    	break
-    }
-    else if(turn == 9){
-    	window.alert("Its a Tie")
-    	window.location.reload();
-    	break
-    }
+    	winner = true
+    	break;
+    	}
+	    else if(eachTotal[i] == 15 && arrayOfMoves == oPermutation){
+	    	window.alert("O wins");
+	    	window.location.reload();
+	    	winner = true
+	    	break;
+	    }
+
   }
+  	if(turn == 9 && winner == false){
+	    	window.alert("Its a Tie")
+	    	window.location.reload();
+
+	    }
     return eachTotal;
 	}
 
