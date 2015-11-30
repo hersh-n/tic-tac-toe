@@ -79,14 +79,17 @@ $(document).ready(function() {
 		for(i = 0; i < eachTotal.length; i++){
     	if(eachTotal[i] == 15 && arrayOfMoves == xPermutation){
     	window.alert("X wins");
+    	window.location.reload();
     	break
     }
     else if(eachTotal[i] == 15 && arrayOfMoves == oPermutation){
     	window.alert("O wins");
+    	window.location.reload();
     	break
     }
     else if(turn == 9){
     	window.alert("Its a Tie")
+    	window.location.reload();
     	break
     }
   }
