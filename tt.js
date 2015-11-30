@@ -68,9 +68,9 @@ $(document).ready(function() {
 		var total = 0;
 		var eachTotal = [];
 		for(i = 0; i < arrayOfMoves.length; i++){
-			//if(arrayOfMoves[i].length > 3){
-			//	arrayOfMoves[i] = arrayOfMoves[i].slice(0, 3)
-			//}
+			if(arrayOfMoves[i].length > 3){
+				arrayOfMoves[i] = arrayOfMoves[i].slice(0, 3)
+			}
 				total = arrayOfMoves[i].reduce(function(a, b) {
 					return a + b;
 				});
@@ -79,9 +79,15 @@ $(document).ready(function() {
 		for(i = 0; i < eachTotal.length; i++){
     	if(eachTotal[i] == 15 && arrayOfMoves == xPermutation){
     	window.alert("X wins");
+    	break
     }
     else if(eachTotal[i] == 15 && arrayOfMoves == oPermutation){
     	window.alert("O wins");
+    	break
+    }
+    else if(turn == 9){
+    	window.alert("Its a Tie")
+    	break
     }
   }
     return eachTotal;
